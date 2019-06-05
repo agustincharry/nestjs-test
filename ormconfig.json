@@ -1,0 +1,11 @@
+{
+  "type": "mongodb",
+  "host": "ds133187.mlab.com",
+  "port": 33187,
+  "username": "myuser",
+  "password": "mypass123",
+  "database": "nestjs-test",
+  "entities": ["src/**/*.entity{.ts,.js}"],
+  "synchronize": true,
+  "useNewUrlParser": true
+}
