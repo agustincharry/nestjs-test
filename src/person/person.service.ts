@@ -1,18 +1,18 @@
 import { Injectable } from '@nestjs/common';
-import { ObjectID } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Person } from './person.entity';
+import { PetService} from '../pet/pet.service';
 
 @Injectable()
 export class PersonService {
-  constructor(@InjectRepository(Person) private readonly repository: Repository<Person>) {}
+  constructor(@InjectRepository(Person) private readonly repository: Repository<Person>, private petService: PetService) {}
 
   async getAll(): Promise<Person[]> {
-    return await this.repository.find();
+    return await this.repository.find({relations : ['pets']});
   }
 
-  async getOne(id: ObjectID): Promise<Person> {
+  async getOne(id: number): Promise<Person> {
     return await this.repository.findOne(id);
   }
 
@@ -21,7 +21,7 @@ export class PersonService {
     return obj;
   }
 
-  async update(id: ObjectID, obj: Person): Promise<Person> {
+  async update(id: number, obj: Person): Promise<Person> {
     const p = await this.repository.findOne(id);
     p.name = obj.name;
     p.lastname = obj.lastname;
@@ -29,9 +29,18 @@ export class PersonService {
     return p;
   }
 
-  async delete(id: ObjectID): Promise<Person> {
+  async delete(id: number): Promise<Person> {
     const p = await this.repository.findOne(id);
     await this.repository.remove(p);
     return p;
+  }
+
+  async addPet(id: number, petId: number): Promise<Person> {
+    const obj = await this.repository.findOne(id);
+    const pet = await this.petService.getOne(petId);
+    if(!obj.pets) obj.pets = [];
+    obj.pets.push(pet);
+    await this.repository.save(obj);
+    return obj;
   }
 }

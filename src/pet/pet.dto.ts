@@ -1,7 +1,5 @@
-import { ObjectID } from 'typeorm';
-
 export class PetDTO {
-  id: ObjectID;
+  id: number;
   name: string;
   color: string;
 }

@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { ObjectID } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Pet } from './pet.entity';
@@ -12,7 +11,7 @@ export class PetService {
     return await this.repository.find();
   }
 
-  async getOne(id: ObjectID): Promise<Pet> {
+  async getOne(id: number): Promise<Pet> {
     return await this.repository.findOne(id);
   }
 
@@ -21,7 +20,7 @@ export class PetService {
     return obj;
   }
 
-  async update(id: ObjectID, obj: Pet): Promise<Pet> {
+  async update(id: number, obj: Pet): Promise<Pet> {
     const p = await this.repository.findOne(id);
     p.name = obj.name;
     p.color = obj.color;
@@ -29,7 +28,7 @@ export class PetService {
     return p;
   }
 
-  async delete(id: ObjectID): Promise<Pet> {
+  async delete(id: number): Promise<Pet> {
     const p = await this.repository.findOne(id);
     await this.repository.remove(p);
     return p;

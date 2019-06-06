@@ -1,10 +1,10 @@
 {
-  "type": "mongodb",
-  "host": "ds133187.mlab.com",
-  "port": 33187,
-  "username": "myuser",
-  "password": "mypass123",
-  "database": "nestjs-test",
+  "type": "postgres",
+  "host": "raja.db.elephantsql.com",
+  "port": 5432,
+  "username": "yzzejsje",
+  "password": "kFKkd0xomc2oXBgWWe5bOxZy2RKt_MEx",
+  "database": "yzzejsje",
   "entities": ["src/**/*.entity{.ts,.js}"],
   "synchronize": true,
   "useNewUrlParser": true

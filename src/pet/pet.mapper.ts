@@ -14,6 +14,7 @@ export class PetMapper implements GlobalMapper<PetDTO, Pet> {
     return newObj;
   }
   mappListT1_T2(list: PetDTO[]): Pet[] {
+    if(!list) return [];
     const newList = [];
     for(const obj of list){
       newList.push(this.mappObjT1_T2(obj));
@@ -29,6 +30,7 @@ export class PetMapper implements GlobalMapper<PetDTO, Pet> {
     return newObj;
   }
   mappListT2_T1(list: Pet[]): PetDTO[] {
+    if(!list) return [];
     const newList = [];
     for(const obj of list){
       newList.push(this.mappObjT2_T1(obj));

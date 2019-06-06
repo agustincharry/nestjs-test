@@ -1,5 +1,4 @@
 import { Controller, Body, Param, Get, Post, Put, Delete } from '@nestjs/common';
-import { ObjectID } from 'typeorm';
 import { PetService } from './pet.service';
 import { PetMapper } from './pet.mapper';
 import { PetDTO } from './pet.dto';
@@ -15,7 +14,7 @@ export class PetController {
   }
 
   @Get(':id')
-  async getOne(@Param('id') id: ObjectID): Promise<PetDTO> {
+  async getOne(@Param('id') id: number): Promise<PetDTO> {
     const obj = await this.petService.getOne(id);
     return this.petMapper.mappObjT2_T1(obj);
   }
@@ -28,14 +27,14 @@ export class PetController {
   }
 
   @Put(':id')
-  async update(@Param('id') id: ObjectID, @Body() dto: PetDTO): Promise<PetDTO>{
+  async update(@Param('id') id: number, @Body() dto: PetDTO): Promise<PetDTO>{
     const obj = this.petMapper.mappObjT1_T2(dto);
     const newObj = await this.petService.update(id, obj);
     return this.petMapper.mappObjT2_T1(newObj);
   }
 
   @Delete(':id')
-  async delete(@Param('id') id: ObjectID): Promise<PetDTO> {
+  async delete(@Param('id') id: number): Promise<PetDTO> {
     return this.petService.delete(id);
   }
 }
