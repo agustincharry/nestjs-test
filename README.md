@@ -1,6 +1,11 @@
 # NestJS Test
 ###### Prueba de concepto del framework NestJS para NodeJS.
 
+## Prerequisitos
+```
+npm install
+```
+
 ## Tecnologías usadas
 * NodeJS
 * NestJs
